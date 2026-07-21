@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Microsoft · CRM Strategy Hub for Manufacturing</title>
+  <meta name="color-scheme" content="light dark" />
+  <meta name="robots" content="noindex,nofollow" />
+  <meta name="description" content="A shared home and interactive point of view on where CRM is heading for enterprise process manufacturers — agentic CRM, headless CRM, and modernization on Microsoft Dynamics 365." />
+  <style>
+    :root {
+      --brand-primary: #0078d4;
+      --brand-secondary: #50e6ff;
+      --brand-accent: #243a5e;
+      --brand-deep: #0b2545;
+      --text: #201f1e;
+      --muted: #605e5c;
+      --bg: #ffffff;
+      --panel: #f8f9fb;
+      --panel-2: #eef3fb;
+      --card-bg: #f8f9fb;
+      --border: #e1dfdd;
+      --soon-bg: #f3f2f1;
+      --soon-text: #605e5c;
+      --shadow: rgba(11, 37, 69, 0.12);
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --brand-primary: #4aa3e8;
+        --brand-secondary: #50e6ff;
+        --brand-accent: #cfe4ff;
+        --brand-deep: #cfe4ff;
+        --text: #f3f2f1;
+        --muted: #a19f9d;
+        --bg: #16181d;
+        --panel: #1f2229;
+        --panel-2: #202a3a;
+        --card-bg: #1f2229;
+        --border: #33373f;
+        --soon-bg: #24272e;
+        --soon-text: #a19f9d;
+        --shadow: rgba(0, 0, 0, 0.45);
+      }
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: "Segoe UI", system-ui, -apple-system, Roboto, Helvetica, Arial, sans-serif;
+      color: var(--text);
+      background: var(--bg);
+      line-height: 1.6;
+    }
+    a { color: var(--brand-primary); }
+    .wrap { max-width: 1040px; margin-inline: auto; padding-inline: 32px; }
+
+    /* ---- top nav ---- */
+    nav.bar {
+      position: sticky; top: 0; z-index: 20;
+      background: color-mix(in srgb, var(--bg) 88%, transparent);
+      backdrop-filter: saturate(150%) blur(8px);
+      border-block-end: 1px solid var(--border);
+    }
+    nav.bar .inner {
+      max-width: 1040px; margin-inline: auto; padding: 12px 32px;
+      display: flex; align-items: center; justify-content: space-between; gap: 18px; flex-wrap: wrap;
+    }
+    nav.bar .brand { display: flex; align-items: center; gap: 10px; font-weight: 600; }
+    nav.bar .brand svg { display: block; }
+    /* CUSTOMIZE: swap this text (or drop in the customer's logo) per account. */
+    nav.bar .cobrand { font-size: 12.5px; color: var(--muted); font-weight: 400; }
+    nav.bar .links { display: flex; gap: 16px; flex-wrap: wrap; }
+    nav.bar .links a { color: var(--muted); text-decoration: none; font-size: 14px; }
+    nav.bar .links a:hover { color: var(--brand-primary); }
+
+    /* ---- hero ---- */
+    header.hero {
+      background: linear-gradient(135deg, var(--brand-deep), var(--brand-primary));
+      color: #ffffff;
+      padding-block: 66px;
+    }
+    header.hero .eyebrow {
+      font-size: 13px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--brand-secondary); margin-block-end: 14px;
+    }
+    header.hero h1 { font-size: 42px; line-height: 1.12; margin: 0 0 18px; max-width: 840px; }
+    header.hero p { font-size: 19px; max-width: 760px; margin: 0; color: rgba(255,255,255,0.92); }
+    header.hero .chips { margin-block-start: 26px; display: flex; gap: 10px; flex-wrap: wrap; }
+    header.hero .chip {
+      font-size: 13px; font-weight: 600; padding: 6px 14px; border-radius: 999px;
+      background: rgba(255,255,255,0.14); border: 1px solid rgba(255,255,255,0.28);
+    }
+
+    section { padding-block: 52px; border-block-end: 1px solid var(--border); }
+    section h2 { font-size: 28px; color: var(--brand-accent); margin: 0 0 10px; }
+    section .lead { font-size: 17px; color: var(--muted); max-width: 780px; margin: 0 0 28px; }
+    .kicker {
+      font-size: 12px; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase;
+      color: var(--brand-primary); margin-block-end: 10px;
+    }
+
+    /* ---- resource cards ---- */
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+    .card {
+      border: 1px solid var(--border); border-radius: 14px; padding: 24px; background: var(--card-bg);
+      text-decoration: none; color: inherit; display: flex; flex-direction: column; gap: 10px;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+    }
+    .card .tag {
+      align-self: flex-start; font-size: 11px; font-weight: 700; letter-spacing: 0.06em;
+      text-transform: uppercase; padding: 3px 9px; border-radius: 5px;
+    }
+    .card.ready .tag { background: var(--brand-primary); color: #ffffff; }
+    .card.soon .tag { background: var(--soon-bg); color: var(--soon-text); border: 1px solid var(--border); }
+    .card h3 { margin: 4px 0 0; font-size: 18px; color: var(--brand-accent); }
+    .card p { margin: 0; color: var(--muted); font-size: 14.5px; }
+    .card .cta { margin-block-start: 8px; font-size: 14px; font-weight: 600; color: var(--brand-primary); }
+    .card.soon { cursor: default; }
+    .card.soon .cta { color: var(--muted); }
+    .card.ready:hover { transform: translateY(-2px); box-shadow: 0 10px 26px var(--shadow); border-color: var(--brand-primary); }
+
+    /* ---- canvas intro band ---- */
+    .band { background: var(--panel-2); border: 1px solid var(--border); border-radius: 16px; padding: 30px; }
+    .band h2 { margin: 0 0 8px; border: 0; }
+    .band p { margin: 0; color: var(--muted); max-width: 760px; }
+
+    /* ---- three shifts / tabs ---- */
+    .tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-block-end: 22px; }
+    .tabs button {
+      font: inherit; font-weight: 600; font-size: 15px; padding: 11px 18px; border-radius: 10px; cursor: pointer;
+      background: var(--panel); color: var(--text); border: 1px solid var(--border);
+      transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+    }
+    .tabs button[aria-selected="true"] { background: var(--brand-primary); color: #ffffff; border-color: var(--brand-primary); }
+    .panel { display: none; }
+    .panel.active { display: block; animation: fade 0.25s ease; }
+    @keyframes fade { from { opacity: 0; transform: translateY(4px);} to {opacity:1; transform:none;} }
+    .panel .split { display: grid; grid-template-columns: 1.2fr 1fr; gap: 26px; align-items: start; }
+    .panel h3 { color: var(--brand-accent); font-size: 22px; margin: 0 0 10px; }
+    .panel p { margin: 0 0 14px; }
+    .panel ul { margin: 0; padding-inline-start: 20px; color: var(--text); }
+    .panel li { margin-block-end: 8px; }
+    .sidecard { background: var(--panel-2); border: 1px solid var(--border); border-radius: 14px; padding: 22px; }
+    .sidecard .label { font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+    .sidecard .big { font-size: 20px; font-weight: 600; color: var(--brand-accent); margin-block: 8px 12px; }
+    .sidecard p { font-size: 14.5px; color: var(--muted); margin: 0; }
+
+    /* ---- record vs action strip ---- */
+    .versus { display: grid; grid-template-columns: 1fr auto 1fr; gap: 18px; align-items: center; margin-block-start: 34px; }
+    .versus .box { background: var(--panel); border: 1px solid var(--border); border-radius: 14px; padding: 22px; }
+    .versus .box.now { border-style: dashed; }
+    .versus .box h4 { margin: 0 0 8px; color: var(--brand-accent); font-size: 16px; }
+    .versus .box p { margin: 0; color: var(--muted); font-size: 14.5px; }
+    .versus .arrow { font-size: 26px; color: var(--brand-primary); font-weight: 700; }
+
+    /* ---- economics stat row ---- */
+    .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 18px; }
+    .stat { background: var(--panel); border: 1px solid var(--border); border-radius: 14px; padding: 22px; }
+    .stat .n { font-size: 22px; font-weight: 700; color: var(--brand-primary); line-height: 1.15; }
+    .stat .t { font-size: 14px; color: var(--muted); margin-block-start: 8px; }
+    .stat .src { font-size: 11px; color: var(--muted); margin-block-start: 10px; font-style: italic; }
+
+    /* ---- readiness self-check ---- */
+    .assess { background: var(--panel-2); border: 1px solid var(--border); border-radius: 16px; padding: 28px; }
+    .q { border-block-end: 1px solid var(--border); padding-block: 16px; }
+    .q:first-of-type { padding-block-start: 4px; }
+    .q p.qt { margin: 0 0 12px; font-weight: 600; }
+    .opts { display: flex; gap: 8px; flex-wrap: wrap; }
+    .opts button {
+      font: inherit; font-size: 14px; cursor: pointer; padding: 8px 16px; border-radius: 999px;
+      background: var(--bg); color: var(--text); border: 1px solid var(--border); transition: all 0.12s ease;
+    }
+    .opts button[aria-pressed="true"] { background: var(--brand-primary); color: #fff; border-color: var(--brand-primary); }
+    .result { margin-block-start: 22px; padding: 22px; border-radius: 14px; background: var(--bg); border: 1px solid var(--border); }
+    .result .score { font-size: 15px; font-weight: 600; color: var(--muted); }
+    .meter { block-size: 12px; border-radius: 999px; background: var(--border); overflow: hidden; margin-block: 12px; }
+    .meter > span { display: block; block-size: 100%; inline-size: 0%; background: linear-gradient(90deg, var(--brand-primary), var(--brand-secondary)); transition: inline-size 0.5s ease; }
+    .result .verdict { font-size: 18px; font-weight: 600; color: var(--brand-accent); margin-block-end: 6px; }
+    .result .advice { color: var(--muted); margin: 0; }
+    .hint { font-size: 13px; color: var(--muted); margin-block-start: 14px; }
+
+    /* ---- accordion paths ---- */
+    .acc { border: 1px solid var(--border); border-radius: 14px; overflow: hidden; margin-block-end: 14px; background: var(--panel); }
+    .acc > button {
+      inline-size: 100%; text-align: start; font: inherit; cursor: pointer; padding: 20px 22px;
+      background: transparent; border: 0; color: var(--text);
+      display: flex; justify-content: space-between; align-items: center; gap: 16px;
+    }
+    .acc > button .h { font-size: 18px; font-weight: 600; color: var(--brand-accent); }
+    .acc > button .sub { font-size: 13.5px; color: var(--muted); font-weight: 400; }
+    .acc > button .sign { font-size: 22px; color: var(--brand-primary); transition: transform 0.2s ease; }
+    .acc.open > button .sign { transform: rotate(45deg); }
+    .acc .body { display: none; padding: 0 22px 22px; }
+    .acc.open .body { display: block; }
+    .acc .body ul { margin: 0; padding-inline-start: 20px; color: var(--muted); }
+    .acc .body li { margin-block-end: 8px; }
+    .acc .body .fit { margin-block-start: 12px; font-size: 14px; color: var(--text); }
+
+    /* ---- governance grid ---- */
+    .cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; }
+    .tile { background: var(--panel); border: 1px solid var(--border); border-radius: 14px; padding: 22px; }
+    .tile h4 { margin: 0 0 8px; color: var(--brand-accent); font-size: 16px; }
+    .tile p { margin: 0; color: var(--muted); font-size: 14.5px; }
+
+    /* ---- payoff table ---- */
+    table.payoff { border-collapse: collapse; inline-size: 100%; }
+    table.payoff th, table.payoff td { text-align: start; padding: 14px 16px; border-block-end: 1px solid var(--border); vertical-align: top; }
+    table.payoff th { color: var(--muted); font-size: 13px; text-transform: uppercase; letter-spacing: 0.05em; }
+    table.payoff td.fn { font-weight: 600; color: var(--brand-accent); white-space: nowrap; }
+    table.payoff td { color: var(--text); font-size: 14.5px; }
+
+    /* ---- steps ---- */
+    ol.steps { list-style: none; counter-reset: s; margin: 0; padding: 0; }
+    ol.steps li { counter-increment: s; position: relative; padding: 18px 0 18px 58px; border-block-end: 1px solid var(--border); }
+    ol.steps li::before {
+      content: counter(s); position: absolute; inset-inline-start: 0; top: 16px;
+      inline-size: 38px; block-size: 38px; border-radius: 50%;
+      background: var(--brand-primary); color: #fff; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+    }
+    ol.steps li h4 { margin: 0 0 4px; color: var(--brand-accent); font-size: 17px; }
+    ol.steps li p { margin: 0; color: var(--muted); font-size: 14.5px; }
+
+    .cta-band { background: var(--panel-2); border-radius: 16px; padding: 34px; text-align: center; border: 1px solid var(--border); }
+    .cta-band h2 { border: 0; }
+    .cta-band p { color: var(--muted); max-width: 640px; margin: 0 auto 20px; }
+    .btn { display: inline-block; font-weight: 600; text-decoration: none; background: var(--brand-primary); color: #fff; padding: 13px 26px; border-radius: 10px; }
+
+    footer.foot { padding-block: 30px; color: var(--muted); font-size: 13px; }
+    footer.foot .fine { margin-block-start: 6px; font-size: 12px; }
+
+    @media (max-width: 760px) {
+      .wrap, nav.bar .inner { padding-inline: 20px; }
+      header.hero h1 { font-size: 30px; }
+      .panel .split { grid-template-columns: 1fr; }
+      .versus { grid-template-columns: 1fr; }
+      .versus .arrow { transform: rotate(90deg); justify-self: center; }
+    }
+  </style>
+</head>
+<body id="top">
+  <nav class="bar">
+    <div class="inner">
+      <span class="brand">
+        <svg width="22" height="22" viewBox="0 0 23 23" role="img" aria-label="Microsoft">
+          <rect x="1" y="1" width="10" height="10" fill="#F25022"/>
+          <rect x="12" y="1" width="10" height="10" fill="#7FBA00"/>
+          <rect x="1" y="12" width="10" height="10" fill="#00A4EF"/>
+          <rect x="12" y="12" width="10" height="10" fill="#FFB900"/>
+        </svg>
+        CRM Strategy Hub
+        <!-- CUSTOMIZE: replace the customer label below before sharing. -->
+        <span class="cobrand">&nbsp;· Microsoft &times; Enterprise Manufacturing</span>
+      </span>
+      <span class="links">
+        <a href="#resources">Resources</a>
+        <a href="#canvas">Decision Canvas</a>
+        <a href="#economics">Economics</a>
+        <a href="#readiness">Readiness</a>
+        <a href="#paths">Paths</a>
+        <a href="#next">Next steps</a>
+      </span>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="wrap">
+      <div class="eyebrow">Microsoft &middot; Enterprise Manufacturing</div>
+      <h1>The next era of CRM starts with agents.</h1>
+      <p>A shared home and a point of view for where CRM is heading — as it shifts from a system of record into a system of action for your commercial, service, and quality teams.</p>
+      <div class="chips">
+        <span class="chip">Agentic CRM</span>
+        <span class="chip">Headless CRM</span>
+        <span class="chip">Modernization on Dynamics 365</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- SECTION: Resources -->
+  <section id="resources">
+    <div class="wrap">
+      <div class="kicker">The hub</div>
+      <h2>Resources</h2>
+      <p class="lead">The front door for current and future artifacts on <strong>agentic CRM</strong>, <strong>headless CRM</strong>, and <strong>CRM modernization on Microsoft Dynamics 365</strong> — framed for enterprise process manufacturers. New resources are added here as our work progresses.</p>
+      <div class="grid">
+        <a class="card ready" href="#canvas">
+          <span class="tag">Ready</span>
+          <h3>CRM Decision Canvas</h3>
+          <p>An interactive point of view on CRM economics, modernization paths, governance, and payoff — right on this page.</p>
+          <span class="cta">Jump to the canvas &darr;</span>
+        </a>
+        <div class="card soon">
+          <span class="tag">Coming soon</span>
+          <h3>Session recaps</h3>
+          <p>Concise summaries, decisions, and follow-up actions from working sessions and executive briefings.</p>
+          <span class="cta">Added as sessions happen</span>
+        </div>
+        <div class="card soon">
+          <span class="tag">Coming soon</span>
+          <h3>Agent prototypes</h3>
+          <p>Build-a-thon outputs, demo videos, and workflow prototypes as candidate use cases are prioritized.</p>
+          <span class="cta">Added as we build</span>
+        </div>
+        <div class="card soon">
+          <span class="tag">Coming soon</span>
+          <h3>Reference architectures</h3>
+          <p>Patterns for agentic and headless CRM on Dynamics 365 and the Power Platform, plus governance guidance.</p>
+          <span class="cta">Added as patterns firm up</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION: Canvas intro -->
+  <section id="canvas">
+    <div class="wrap">
+      <div class="band">
+        <div class="kicker">Strategic engagement</div>
+        <h2>CRM Decision Canvas</h2>
+        <p>For process manufacturers, the customer relationship now spans commercial, service, quality, and the plant floor. This canvas is a point of view on where CRM is heading — and a practical way to decide what to do next. Work through it below.</p>
+      </div>
+
+      <div style="margin-block-start:40px;">
+        <div class="kicker">Where CRM is heading</div>
+        <h2>Three shifts reshaping CRM</h2>
+        <p class="lead">CRM is moving from a place where people <em>record</em> what happened to a system that <em>acts</em> on what should happen next. Three shifts are driving that change. Switch between them below.</p>
+
+        <div class="tabs" role="tablist" aria-label="The three CRM shifts">
+          <button role="tab" data-tab="agentic" aria-selected="true">1 · Agentic CRM</button>
+          <button role="tab" data-tab="headless" aria-selected="false">2 · Headless CRM</button>
+          <button role="tab" data-tab="modern" aria-selected="false">3 · Modernization on Dynamics</button>
+        </div>
+
+        <div class="panel active" data-panel="agentic">
+          <div class="split">
+            <div>
+              <h3>From recording work to doing the work</h3>
+              <p>Agentic CRM puts AI agents inside the customer workflow. Instead of a seller or service rep typing updates into forms, agents draft the follow-up, research the account, prepare the quote, open the case, and route the exception — with a human in the loop where it matters.</p>
+              <ul>
+                <li><strong>Sales agents</strong> research accounts, prep meetings, and keep the pipeline current without manual data entry.</li>
+                <li><strong>Service agents</strong> triage cases, pull product and warranty history, and draft resolutions.</li>
+                <li><strong>Quality &amp; field agents</strong> connect a complaint or non-conformance back to the batch, lot, or device record.</li>
+              </ul>
+            </div>
+            <div class="sidecard">
+              <div class="label">Why it matters first</div>
+              <div class="big">Agents are the low-risk way in</div>
+              <p>You don't have to replatform to start. A focused agent proves value on today's data and processes — and becomes the on-ramp to the bigger CRM conversation.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel" data-panel="headless">
+          <div class="split">
+            <div>
+              <h3>The CRM shows up where the work happens</h3>
+              <p>Headless CRM separates the customer data and logic from any single screen. The same governed data surfaces in Teams, in a field service app, in a customer portal, on a shop-floor tablet, or inside an agent — instead of forcing everyone into one CRM UI they avoid.</p>
+              <ul>
+                <li>One governed source of customer truth, many experiences on top of it.</li>
+                <li>Composable services and APIs instead of a monolithic, hard-to-change app.</li>
+                <li>Adoption rises because the CRM meets people in the tools they already use.</li>
+              </ul>
+            </div>
+            <div class="sidecard">
+              <div class="label">The manufacturer angle</div>
+              <div class="big">Customer data beyond the sales team</div>
+              <p>In process manufacturing the "customer record" touches order management, service, quality, and regulatory. Headless lets each of those consume the same data without a rip-and-replace.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel" data-panel="modern">
+          <div class="split">
+            <div>
+              <h3>Consolidating onto a modern platform</h3>
+              <p>Agentic and headless patterns are hard to sustain on fragmented or heavily customized legacy CRM. Modernization on <strong>Microsoft Dynamics 365</strong> and the <strong>Power Platform</strong> gives you a common data foundation, built-in AI (Copilot), and a governed place to build and run agents.</p>
+              <ul>
+                <li>Consolidate scattered spreadsheets, homegrown tools, and aging CRM instances.</li>
+                <li>Native Copilot and agent tooling instead of bolted-on AI.</li>
+                <li>Security, compliance, and data residency suited to regulated manufacturers.</li>
+              </ul>
+            </div>
+            <div class="sidecard">
+              <div class="label">The narrative</div>
+              <div class="big">Start with agents, plan for the platform</div>
+              <p>Modernization isn't step one — it's the destination that early agent wins make the case for. This canvas is designed to move that planning conversation forward.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="versus">
+          <div class="box now">
+            <h4>CRM as a system of record</h4>
+            <p>People enter data after the fact. Value depends on discipline. AI, if any, summarizes the past.</p>
+          </div>
+          <div class="arrow" aria-hidden="true">&rarr;</div>
+          <div class="box">
+            <h4>CRM as a system of action</h4>
+            <p>Agents do the work and keep data current as a by-product. Value compounds. AI drives the next best action.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION: Economics -->
+  <section id="economics">
+    <div class="wrap">
+      <div class="kicker">The economics</div>
+      <h2>The cost of standing still</h2>
+      <p class="lead">The question isn't only "what does modern CRM cost?" — it's "what is fragmented, low-adoption CRM already costing us?" These are the levers to size with your teams.</p>
+      <div class="stats">
+        <div class="stat"><div class="n">Selling time</div><div class="t">Hours lost each week to manual data entry, research, and admin that agents can absorb.</div><div class="src">Size this with your commercial team.</div></div>
+        <div class="stat"><div class="n">Adoption</div><div class="t">The share of your CRM you pay for but don't use because reps work around it.</div><div class="src">Size this from license vs. active usage.</div></div>
+        <div class="stat"><div class="n">Tool sprawl</div><div class="t">Redundant CRM instances, spreadsheets, and point tools that duplicate the customer record.</div><div class="src">Size this from your app inventory.</div></div>
+        <div class="stat"><div class="n">Time-to-serve</div><div class="t">Days to resolve a customer or quality issue when data lives in disconnected systems.</div><div class="src">Size this from service &amp; quality SLAs.</div></div>
+      </div>
+      <p class="hint">These are framing levers, not benchmarks. We'll replace them with your numbers in a working session — that shared model becomes the business case.</p>
+    </div>
+  </section>
+
+  <!-- SECTION: Readiness self-check -->
+  <section id="readiness">
+    <div class="wrap">
+      <div class="kicker">Interactive</div>
+      <h2>CRM modernization readiness — 60-second self-check</h2>
+      <p class="lead">Answer five questions the way you'd describe your organization today. Your score is directional — a conversation starter, not an audit.</p>
+
+      <div class="assess" id="assess">
+        <div class="q" data-q="1">
+          <p class="qt">1. Our sellers and service reps trust the CRM as the single source of customer truth.</p>
+          <div class="opts" role="group" aria-label="Question 1"><button data-v="2">Mostly true</button><button data-v="1">Partly</button><button data-v="0">Not really</button></div>
+        </div>
+        <div class="q" data-q="2">
+          <p class="qt">2. Customer data flows across sales, service, and quality without manual re-keying.</p>
+          <div class="opts" role="group" aria-label="Question 2"><button data-v="2">Mostly true</button><button data-v="1">Partly</button><button data-v="0">Not really</button></div>
+        </div>
+        <div class="q" data-q="3">
+          <p class="qt">3. We could add AI or an agent to a customer workflow without a major re-build.</p>
+          <div class="opts" role="group" aria-label="Question 3"><button data-v="2">Mostly true</button><button data-v="1">Partly</button><button data-v="0">Not really</button></div>
+        </div>
+        <div class="q" data-q="4">
+          <p class="qt">4. We have the governance and data foundation to let agents act safely on customer data.</p>
+          <div class="opts" role="group" aria-label="Question 4"><button data-v="2">Mostly true</button><button data-v="1">Partly</button><button data-v="0">Not really</button></div>
+        </div>
+        <div class="q" data-q="5">
+          <p class="qt">5. Our CRM is on a modern, supported platform — not heavily customized legacy or spreadsheets.</p>
+          <div class="opts" role="group" aria-label="Question 5"><button data-v="2">Mostly true</button><button data-v="1">Partly</button><button data-v="0">Not really</button></div>
+        </div>
+
+        <div class="result" id="result" aria-live="polite">
+          <div class="score" id="scoreLine">Answer the five questions to see your readiness.</div>
+          <div class="meter"><span id="meterBar"></span></div>
+          <div class="verdict" id="verdict">Awaiting your answers…</div>
+          <p class="advice" id="advice">Each answer updates your score instantly.</p>
+        </div>
+        <p class="hint">Directional only — built to spark the conversation about where to start, not to grade your organization.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION: Paths -->
+  <section id="paths">
+    <div class="wrap">
+      <div class="kicker">Modernization paths</div>
+      <h2>Three ways forward — and when each fits</h2>
+      <p class="lead">You don't have to choose "replace everything" or "do nothing." Expand each path to see the trade-offs and where it fits.</p>
+
+      <div class="acc open">
+        <button aria-expanded="true">
+          <span><span class="h">Path A · Enhance in place</span><br><span class="sub">Add agents and AI to today's CRM</span></span>
+          <span class="sign" aria-hidden="true">+</span>
+        </button>
+        <div class="body">
+          <ul>
+            <li>Lowest disruption — layer Copilot and focused agents onto existing systems.</li>
+            <li>Fastest proof of value; minimal change management.</li>
+            <li>Limited by whatever your current data foundation can support.</li>
+          </ul>
+          <p class="fit"><strong>Fits when:</strong> you need a quick win and executive sponsorship before committing to a bigger program.</p>
+        </div>
+      </div>
+
+      <div class="acc">
+        <button aria-expanded="false">
+          <span><span class="h">Path B · Extend with a modern layer</span><br><span class="sub">Headless data + Power Platform around the core</span></span>
+          <span class="sign" aria-hidden="true">+</span>
+        </button>
+        <div class="body">
+          <ul>
+            <li>Introduce a governed data layer and composable services alongside legacy CRM.</li>
+            <li>Surface customer data in Teams, portals, and field apps without a full migration.</li>
+            <li>Sets up an incremental path to full modernization.</li>
+          </ul>
+          <p class="fit"><strong>Fits when:</strong> the core system stays for now, but adoption and integration are the real pain.</p>
+        </div>
+      </div>
+
+      <div class="acc">
+        <button aria-expanded="false">
+          <span><span class="h">Path C · Replatform on Dynamics 365</span><br><span class="sub">Consolidate onto a modern, AI-native CRM</span></span>
+          <span class="sign" aria-hidden="true">+</span>
+        </button>
+        <div class="body">
+          <ul>
+            <li>Consolidate fragmented systems onto one governed platform with native Copilot and agents.</li>
+            <li>Highest long-term payoff; strongest foundation for agentic and headless patterns.</li>
+            <li>Largest change effort — best sequenced after early agent wins build the case.</li>
+          </ul>
+          <p class="fit"><strong>Fits when:</strong> legacy cost, risk, or limits are blocking where the business wants to go.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION: Governance -->
+  <section id="governance">
+    <div class="wrap">
+      <div class="kicker">Governance &amp; trust</div>
+      <h2>What regulated manufacturers need before agents act</h2>
+      <p class="lead">In segments like medical devices, pharma packaging, and specialty materials, "let AI act on customer data" only works with guardrails. These are the non-negotiables.</p>
+      <div class="cols">
+        <div class="tile"><h4>Data foundation</h4><p>A governed, well-defined customer record agents can trust — before they can act, the data has to be right.</p></div>
+        <div class="tile"><h4>Security &amp; access</h4><p>Identity, least-privilege access, and audit so agents operate within the same controls as people.</p></div>
+        <div class="tile"><h4>Compliance &amp; traceability</h4><p>Validation, records, and traceability that stand up to regulated-industry scrutiny.</p></div>
+        <div class="tile"><h4>Human in the loop</h4><p>Clear boundaries for what an agent decides versus what a person approves.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION: Payoff -->
+  <section id="payoff">
+    <div class="wrap">
+      <div class="kicker">The payoff</div>
+      <h2>What changes, by function</h2>
+      <p class="lead">Where a system of action shows up across a process manufacturer.</p>
+      <table class="payoff">
+        <thead><tr><th>Function</th><th>Today</th><th>With agentic, headless CRM on Dynamics</th></tr></thead>
+        <tbody>
+          <tr><td class="fn">Commercial</td><td>Reps split time between selling and admin; pipeline is stale.</td><td>Agents research, prep, and update — reps spend more time with customers.</td></tr>
+          <tr><td class="fn">Service</td><td>Cases bounce between systems; history is hard to assemble.</td><td>Agents triage and draft resolutions with full product and warranty context.</td></tr>
+          <tr><td class="fn">Quality &amp; regulatory</td><td>Complaints are disconnected from batch, lot, or device data.</td><td>Customer issues link to the right records with traceability intact.</td></tr>
+          <tr><td class="fn">Operations &amp; IT</td><td>Duplicate tools and integrations to maintain.</td><td>One governed platform; less sprawl, faster change.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- SECTION: Next steps -->
+  <section id="next">
+    <div class="wrap">
+      <div class="kicker">Practical next steps</div>
+      <h2>A low-risk way to start</h2>
+      <p class="lead">A sequence designed to prove value fast and earn the right to the bigger modernization conversation.</p>
+      <ol class="steps">
+        <li><h4>Align on the point of view</h4><p>Walk this canvas together and agree where CRM is heading for your business.</p></li>
+        <li><h4>Pick one agent use case</h4><p>Choose a high-friction workflow in sales, service, or quality where an agent can prove value in weeks.</p></li>
+        <li><h4>Build the shared business case</h4><p>Replace the framing levers above with your numbers to size the cost of standing still.</p></li>
+        <li><h4>Prioritize the roadmap</h4><p>Sequence enhance / extend / replatform against value, risk, and readiness.</p></li>
+        <li><h4>Plan the modernization</h4><p>Turn early wins into a phased Dynamics 365 modernization plan with governance built in.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <section style="border-block-end:0;">
+    <div class="wrap">
+      <div class="cta-band">
+        <h2>Let's turn this into your plan</h2>
+        <p>The fastest next move is a working session to pick a first agent use case and start the shared business case for CRM modernization.</p>
+        <a class="btn" href="#top">Back to the top</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="foot">
+    <div class="wrap">
+      <div>Microsoft &middot; CRM Strategy Hub for enterprise manufacturing. Prepared for discussion.</div>
+      <div class="fine">Illustrative point of view. Figures shown are framing levers to be replaced with customer-specific data — not benchmarks or commitments. Shared by link; please keep confidential customer and pricing detail off this page.</div>
+    </div>
+  </footer>
+
+  <script>
+    // Tabs for the three shifts
+    (function () {
+      var tabs = document.querySelectorAll('.tabs [role="tab"]');
+      var panels = document.querySelectorAll('.panel[data-panel]');
+      tabs.forEach(function (tab) {
+        tab.addEventListener('click', function () {
+          tabs.forEach(function (t) { t.setAttribute('aria-selected', 'false'); });
+          tab.setAttribute('aria-selected', 'true');
+          var target = tab.getAttribute('data-tab');
+          panels.forEach(function (p) { p.classList.toggle('active', p.getAttribute('data-panel') === target); });
+        });
+      });
+    })();
+
+    // Accordion for modernization paths
+    (function () {
+      var accs = document.querySelectorAll('.acc > button');
+      accs.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var acc = btn.parentElement;
+          var open = acc.classList.toggle('open');
+          btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        });
+      });
+    })();
+
+    // Readiness self-check
+    (function () {
+      var answers = {};
+      var maxScore = 10;
+      var groups = document.querySelectorAll('#assess .q');
+      var meter = document.getElementById('meterBar');
+      var scoreLine = document.getElementById('scoreLine');
+      var verdict = document.getElementById('verdict');
+      var advice = document.getElementById('advice');
+
+      function render() {
+        var keys = Object.keys(answers);
+        var total = keys.reduce(function (s, k) { return s + answers[k]; }, 0);
+        var answered = keys.length;
+        var pct = Math.round((total / maxScore) * 100);
+        meter.style.width = (answered ? pct : 0) + '%';
+        if (answered < 5) {
+          scoreLine.textContent = 'Answered ' + answered + ' of 5 — running score ' + total + ' / ' + maxScore + '.';
+          verdict.textContent = 'Keep going…';
+          advice.textContent = 'Your readiness verdict appears once all five are answered.';
+          return;
+        }
+        scoreLine.textContent = 'Your readiness score: ' + total + ' / ' + maxScore + ' (' + pct + '%).';
+        var v, a;
+        if (total <= 3) {
+          v = 'Foundational — start with a focused agent.';
+          a = 'Your fastest, lowest-risk win is a single agent on today\u2019s data. Use it to build momentum and the case for a stronger foundation. (Path A)';
+        } else if (total <= 7) {
+          v = 'Emerging — extend and prioritize.';
+          a = 'You have building blocks in place. Add a governed data layer and prioritize the workflows that modernization would unlock most. (Path A \u2192 B)';
+        } else {
+          v = 'Advanced — plan the platform move.';
+          a = 'You are well positioned to consolidate onto a modern, AI-native CRM and scale agentic and headless patterns. (Path B \u2192 C)';
+        }
+        verdict.textContent = v;
+        advice.textContent = a;
+      }
+
+      groups.forEach(function (q) {
+        var id = q.getAttribute('data-q');
+        var opts = q.querySelectorAll('.opts button');
+        opts.forEach(function (b) {
+          b.addEventListener('click', function () {
+            opts.forEach(function (o) { o.setAttribute('aria-pressed', 'false'); });
+            b.setAttribute('aria-pressed', 'true');
+            answers[id] = parseInt(b.getAttribute('data-v'), 10);
+            render();
+          });
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
